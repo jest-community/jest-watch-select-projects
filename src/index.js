@@ -28,7 +28,7 @@ class JestPluginProjects {
           throw new Error(`
 
 Project in "${p.config.rootDir}" does not have a \`displayName\`.
-In order to use \`jest-watch-select-project\`, please add \`displayName\` to all the projects.
+In order to use \`jest-watch-select-projects\`, please add \`displayName\` to all the projects.
 
     - More info: https://facebook.github.io/jest/docs/en/configuration.html#projects-array-string-projectconfig
           `);

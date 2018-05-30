@@ -5,14 +5,14 @@
    
    Open terminal (e.g. Terminal, iTerm, Git Bash or Git Shell) and type:
    ```sh
-   git clone https://github.com/<your_username>/jest-watch-select-project
+   git clone https://github.com/<your_username>/jest-watch-select-projects
    cd jest
    git checkout -b my_branch
    ```
    Note:
    Replace `<your_username>` with your GitHub username
 
-2. jest-watch-select-project uses [Yarn](https://code.facebook.com/posts/1840075619545360)
+2. jest-watch-select-projects uses [Yarn](https://code.facebook.com/posts/1840075619545360)
    for running development scripts. If you haven't already done so,
    please [install yarn](https://yarnpkg.com/en/docs/install).
 

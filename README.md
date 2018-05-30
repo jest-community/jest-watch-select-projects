@@ -1,11 +1,11 @@
-[![Build Status](https://travis-ci.org/jest-community/jest-watch-select-project.svg?branch=master)](https://travis-ci.org/jest-community/jest-watch-select-project) [![npm version](https://badge.fury.io/js/jest-watch-select-project.svg)](https://badge.fury.io/js/jest-watch-select-project)
+[![Build Status](https://travis-ci.org/jest-community/jest-watch-select-projects.svg?branch=master)](https://travis-ci.org/jest-community/jest-watch-select-projects) [![npm version](https://badge.fury.io/js/jest-watch-select-projects.svg)](https://badge.fury.io/js/jest-watch-select-projects)
 
 <div align="center">
   <!-- replace with accurate logo e.g from https://worldvectorlogo.com/ -->
   <a href="https://facebook.github.io/jest/">
     <img width="150" height="150" vspace="" hspace="25" src="https://cdn.worldvectorlogo.com/logos/jest.svg">
   </a>
-  <h1>jest-watch-select-project</h1>
+  <h1>jest-watch-select-projects</h1>
   <p>Select which Jest project to run</p>
 </div>
 
@@ -15,14 +15,14 @@
 
 ### Install
 
-Install `jest`_(it needs Jest 23+)_ and `jest-watch-select-project`
+Install `jest`_(it needs Jest 23+)_ and `jest-watch-select-projects`
 
 ```bash
-yarn add --dev jest jest-watch-select-project
+yarn add --dev jest jest-watch-select-projects
 
 # or with NPM
 
-npm install --save-dev jest jest-watch-select-project
+npm install --save-dev jest jest-watch-select-projects
 ```
 
 ### Add it to your Jest config
@@ -32,7 +32,7 @@ In your `package.json`
 ```json
 {
   "jest": {
-    "watchPlugins": ["jest-watch-select-project"]
+    "watchPlugins": ["jest-watch-select-projects"]
   }
 }
 ```
@@ -41,7 +41,7 @@ Or in `jest.config.js`
 
 ```js
 module.exports = {
-  watchPlugins: ['jest-watch-select-project']
+  watchPlugins: ['jest-watch-select-projects']
 };
 ```
 

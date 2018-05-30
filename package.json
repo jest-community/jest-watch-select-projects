@@ -1,5 +1,5 @@
 {
-  "name": "jest-watch-select-project",
+  "name": "jest-watch-select-projects",
   "version": "0.0.0",
   "main": "build/index.js",
   "author": "Rogelio Guzman <rogelioguzmanh@gmail.com>",
@@ -7,9 +7,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rogeliog/jest-watch-select-project.git"
+    "url": "https://github.com/rogeliog/jest-watch-select-projects.git"
   },
-  "homepage": "https://github.com/rogeliog/jest-watch-select-project",
+  "homepage": "https://github.com/rogeliog/jest-watch-select-projects",
   "files": [
     "build/"
   ],
