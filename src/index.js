@@ -1,70 +1,94 @@
+const chalk = require('chalk');
 const prompts = require('prompts');
 const ansiEscapes = require('ansi-escapes');
 const { readConfig } = require('jest-config');
 
 class JestPluginProjects {
   constructor() {
-    this._selectedProjects = {};
+    this._activeProjects = {};
   }
 
   apply(jestHook) {
+    jestHook.onFileChange(({ projects }) => this._setProjects(projects));
     jestHook.shouldRunTestSuite(
       ({ testPath, config: { displayName } }) =>
         displayName === undefined ||
-        this._selectedProjects[displayName] === undefined ||
-        this._selectedProjects[displayName],
+        this._activeProjects[displayName] === undefined ||
+        this._activeProjects[displayName],
     );
   }
 
   onKey() {}
 
-  _getProjectNames({ projects }) {
+  _setProjects(projects) {
     if (!this._projectNames) {
-      this._projectNames = projects
-        .map(projectOrPath => {
-          if (typeof projectOrPath === 'object') {
-            return projectOrPath.displayName;
-          }
-          return readConfig({}, projectOrPath).projectConfig.displayName;
-        })
-        .filter(Boolean);
-    }
+      console.log(projects.slice(0, 2).map(p => p.config));
+      this._projectNames = projects.map(p => {
+        if (!p.config.displayName) {
+          throw new Error(`
 
-    return this._projectNames;
+Project in "${p.config.rootDir}" does not have a \`displayName\`.
+In order to use \`jest-watch-select-project\`, please add \`displayName\` to all the projects.
+
+    - More info: https://facebook.github.io/jest/docs/en/configuration.html#projects-array-string-projectconfig
+          `);
+        }
+
+        return p.config.displayName;
+      });
+      this._setActiveProjects(this._projectNames);
+    }
+  }
+
+  _setActiveProjects(activeProjects) {
+    this._numActiveProjects = activeProjects.length;
+    this._activeProjects = this._projectNames.reduce((memo, name) => {
+      memo[name] = activeProjects.includes(name);
+      return memo;
+    }, {});
   }
 
   run(globalConfig) {
     console.log(ansiEscapes.clearScreen);
-    const projectNames = this._getProjectNames(globalConfig);
-
     return prompts([
       {
         type: 'multiselect',
         name: 'activeProjects',
         message: 'Select projects',
-        choices: projectNames.map(name => ({
-          title: name,
-          value: name,
-          selected:
-            this._selectedProjects[name] === undefined ||
-            this._selectedProjects[name],
+        choices: this._projectNames.map(value => ({
+          value,
+          selected: this._activeProjects[value],
         })),
       },
     ]).then(({ activeProjects }) => {
-      this._selectedProjects = projectNames.reduce((memo, name) => {
-        memo[name] = activeProjects.includes(name);
-        return memo;
-      }, {});
       process.stdin.setRawMode(true);
       process.stdin.resume();
-      return true;
+
+      if (activeProjects !== undefined) {
+        this._setActiveProjects(activeProjects);
+        return true;
+      }
+      return Promise.reject();
     });
+  }
+
+  _getActiveProjectsText() {
+    const numProjects = this._projectNames.length;
+
+    if (this._numActiveProjects === numProjects) {
+      return '(all selected)';
+    } else if (this._numActiveProjects === 0) {
+      return '(zero selected)';
+    } else {
+      return `(${this._numActiveProjects}/${numProjects} selected)`;
+    }
+    return;
   }
 
   getUsageInfo() {
     return {
       key: 'P',
-      prompt: 'select projects',
+      prompt: `select projects ${chalk.italic(this._getActiveProjectsText())}`,
     };
   }
 }
