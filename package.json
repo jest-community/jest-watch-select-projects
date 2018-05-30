@@ -1,0 +1,43 @@
+{
+  "name": "jest-watch-select-project",
+  "version": "0.0.0",
+  "main": "build/index.js",
+  "author": "Rogelio Guzman <rogelioguzmanh@gmail.com>",
+  "description": "An experimental ESLint runner for Jest",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rogeliog/jest-watch-select-project.git"
+  },
+  "homepage": "https://github.com/rogeliog/jest-watch-select-project",
+  "files": [
+    "build/"
+  ],
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint .",
+    "watch": "babel src -w --ignore **/*.test.js,integration -d build",
+    "build": "babel src --ignore **/*.test.js,integration -d build",
+    "prepublish": "yarn build",
+    "format": "prettier --single-quote --trailing-comma all --write \"!(build)/**/*.js\""
+  },
+  "dependencies": {
+    "ansi-escapes": "^3.1.0",
+    "eslint": "^4.5.0",
+    "jest-config": "^23.0.1",
+    "prompts": "^0.1.8"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-jest": "23.0.1",
+    "babel-preset-env": "1.7.0",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-import": "2.12.0",
+    "eslint-plugin-jest": "21.17.0",
+    "eslint-plugin-prettier": "2.6.0",
+    "execa": "0.8.0",
+    "jest": "23.0.1",
+    "prettier": "1.13.0"
+  }
+}
