@@ -9,7 +9,7 @@
   <p>Select which Jest project to run</p>
 </div>
 
-![select-projects](https://user-images.githubusercontent.com/574806/40687850-d23ec5ea-6350-11e8-8a8d-a72b7faf2163.gif)
+![select-project](https://user-images.githubusercontent.com/574806/40741798-3ca7c250-6401-11e8-8398-d39ab4eea011.gif)
 
 ## Usage
 
