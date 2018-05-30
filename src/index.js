@@ -21,9 +21,12 @@ class JestPluginProjects {
   _getProjectNames({ projects }) {
     if (!this._projectNames) {
       this._projectNames = projects
-        .map(
-          projectPath => readConfig({}, projectPath).projectConfig.displayName,
-        )
+        .map(projectOrPath => {
+          if (typeof projectOrPath === 'object') {
+            return projectOrPath.displayName;
+          }
+          return readConfig({}, projectOrPath).projectConfig.displayName;
+        })
         .filter(Boolean);
     }
 
@@ -61,7 +64,7 @@ class JestPluginProjects {
   getUsageInfo() {
     return {
       key: 'P',
-      prompt: 'select projects. ',
+      prompt: 'select projects',
     };
   }
 }
