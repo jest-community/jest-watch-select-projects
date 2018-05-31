@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const prompts = require('prompts');
 const ansiEscapes = require('ansi-escapes');
 const { readConfig } = require('jest-config');
+const path = require('path');
 
 class JestPluginProjects {
   constructor() {
@@ -24,7 +25,9 @@ class JestPluginProjects {
     if (!this._projectNames) {
       console.log(projects.slice(0, 2).map(p => p.config));
       this._projectNames = projects.map(p => {
-        if (!p.config.displayName) {
+        const projectName = p.config.displayName || path.basename(p.config.rootDir);
+
+        if (!projectName) {
           throw new Error(`
 
 Project in "${p.config.rootDir}" does not have a \`displayName\`.
@@ -34,7 +37,7 @@ In order to use \`jest-watch-select-projects\`, please add \`displayName\` to al
           `);
         }
 
-        return p.config.displayName;
+        return projectName;
       });
       this._setActiveProjects(this._projectNames);
     }
