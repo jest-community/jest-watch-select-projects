@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const prompts = require('prompts');
 const ansiEscapes = require('ansi-escapes');
 const { readConfig } = require('jest-config');
+const path = require('path');
 
 class JestPluginProjects {
   constructor() {
@@ -23,19 +24,39 @@ class JestPluginProjects {
   _setProjects(projects) {
     if (!this._projectNames) {
       console.log(projects.slice(0, 2).map(p => p.config));
-      this._projectNames = projects.map(p => {
-        if (!p.config.displayName) {
-          throw new Error(`
 
-Project in "${p.config.rootDir}" does not have a \`displayName\`.
-In order to use \`jest-watch-select-projects\`, please add \`displayName\` to all the projects.
+      const projectNameSet = projects.reduce(
+        (state, p) => {
+          const { displayName, rootDir } = p.config;
+          if (state.has(displayName)) {
+            throw new Error(`
 
+Found multiple projects with the same \`displayName\`: "${displayName}"
+
+Change the \`displayName\` on at least one of them to prevent name collision.
     - More info: https://facebook.github.io/jest/docs/en/configuration.html#projects-array-string-projectconfig
-          `);
-        }
 
-        return p.config.displayName;
-      });
+            `);
+          }
+
+          const basename = path.basename(rootDir);
+          if (state.has(baseName)) {
+            throw new Error(`
+
+Found multiple projects with the same directory basename: "${basename}"
+
+Add a \`displayName\` to at least one of them to prevent name collision.
+    - More info: https://facebook.github.io/jest/docs/en/configuration.html#projects-array-string-projectconfig
+
+            `);
+          }
+
+          return new Set([...state, projectName]);
+        },
+        new Set()
+      );
+
+      this._projectNames = [...projectNameSet];
       this._setActiveProjects(this._projectNames);
     }
   }
