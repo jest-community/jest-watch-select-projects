@@ -27,19 +27,31 @@ class JestPluginProjects {
 
       const projectNameSet = projects.reduce(
         (state, p) => {
-          const projectName = p.config.displayName || path.basename(p.config.rootDir);
-          if (state.has(projectName)) {
+          const { displayName, rootDir } = p.config;
+          if (state.has(displayName)) {
             throw new Error(`
 
-Found multiple projects in the same directory. "${p.config.rootDir}"
+Found multiple projects with the same \`displayName\`: "${displayName}"
+
+Change the \`displayName\` on at least one of them to prevent name collision.
+    - More info: https://facebook.github.io/jest/docs/en/configuration.html#projects-array-string-projectconfig
+
+            `);
+          }
+
+          const basename = path.basename(rootDir);
+          if (state.has(baseName)) {
+            throw new Error(`
+
+Found multiple projects with the same directory basename: "${basename}"
 
 Add a \`displayName\` to at least one of them to prevent name collision.
     - More info: https://facebook.github.io/jest/docs/en/configuration.html#projects-array-string-projectconfig
 
             `);
-          } else {
-            return new Set([...state, projectName]);
           }
+
+          return new Set([...state, projectName]);
         },
         new Set()
       );
