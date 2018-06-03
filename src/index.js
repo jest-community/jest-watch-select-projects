@@ -38,7 +38,7 @@ Change the \`displayName\` on at least one of them to prevent name collision.
           }
 
           const basename = path.basename(rootDir);
-          if (state.has(baseName)) {
+          if (state.has(basename)) {
             throw new Error(`
 
 Found multiple projects with the same directory basename: "${basename}"
