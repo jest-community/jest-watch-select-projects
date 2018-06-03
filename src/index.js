@@ -49,7 +49,7 @@ Add a \`displayName\` to at least one of them to prevent name collision.
             `);
           }
 
-          return new Set([...state, projectName]);
+          return new Set([...state, displayName || basename]);
         },
         new Set()
       );
