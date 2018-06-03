@@ -24,21 +24,27 @@ class JestPluginProjects {
   _setProjects(projects) {
     if (!this._projectNames) {
       console.log(projects.slice(0, 2).map(p => p.config));
-      this._projectNames = projects.map(p => {
-        const projectName = p.config.displayName || path.basename(p.config.rootDir);
 
-        if (!projectName) {
-          throw new Error(`
+      const projectNameSet = projects.reduce(
+        (state, p) => {
+          const projectName = p.config.displayName || path.basename(p.config.rootDir);
+          if (state.has(projectName)) {
+            throw new Error(`
 
-Project in "${p.config.rootDir}" does not have a \`displayName\`.
-In order to use \`jest-watch-select-projects\`, please add \`displayName\` to all the projects.
+Found multiple projects in the same directory. "${p.config.rootDir}"
 
+Add a \`displayName\` to at least one of them to prevent name collision.
     - More info: https://facebook.github.io/jest/docs/en/configuration.html#projects-array-string-projectconfig
-          `);
-        }
 
-        return projectName;
-      });
+            `);
+          } else {
+            return new Set([...state, projectName]);
+          }
+        },
+        new Set()
+      );
+
+      this._projectNames = [...projectNameSet];
       this._setActiveProjects(this._projectNames);
     }
   }
