@@ -23,8 +23,6 @@ class JestPluginProjects {
 
   _setProjects(projects) {
     if (!this._projectNames) {
-      console.log(projects.slice(0, 2).map(p => p.config));
-
       const projectNameSet = projects.reduce(
         (state, p) => {
           const { displayName, rootDir } = p.config;
