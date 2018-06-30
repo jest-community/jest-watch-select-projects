@@ -50,3 +50,11 @@ module.exports = {
 ```bash
 yarn jest --watch
 ```
+
+## FAQ
+
+**Why is this running all of my projects?**
+
+Make certain that you're using the SPACE key to toggle the selected state of projects and the ENTER key to confirm your settings.
+
+
