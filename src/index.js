@@ -7,6 +7,7 @@ const path = require('path');
 class JestPluginProjects {
   constructor() {
     this._activeProjects = {};
+    this._projectNames = [];
   }
 
   apply(jestHook) {
@@ -22,7 +23,7 @@ class JestPluginProjects {
   onKey() {}
 
   _setProjects(projects) {
-    if (!this._projectNames) {
+    if (!this._projectNames.length) {
       const projectNameSet = projects.reduce(
         (state, p) => {
           const { displayName, rootDir } = p.config;
