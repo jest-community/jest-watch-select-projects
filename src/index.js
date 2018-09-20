@@ -12,23 +12,22 @@ class JestPluginProjects {
 
   apply(jestHook) {
     jestHook.onFileChange(({ projects }) => this._setProjects(projects));
-    jestHook.shouldRunTestSuite(
-      ({ testPath, config: { displayName } }) =>
-        displayName === undefined ||
-        this._activeProjects[displayName] === undefined ||
-        this._activeProjects[displayName],
-    );
+    jestHook.shouldRunTestSuite(({ testPath, config }) => {
+      const name = config.displayName || path.basename(config.rootDir);
+      return (
+        this._activeProjects[name] === undefined || this._activeProjects[name]
+      );
+    });
   }
 
   onKey() {}
 
   _setProjects(projects) {
     if (!this._projectNames.length) {
-      const projectNameSet = projects.reduce(
-        (state, p) => {
-          const { displayName, rootDir } = p.config;
-          if (state.has(displayName)) {
-            throw new Error(`
+      const projectNameSet = projects.reduce((state, p) => {
+        const { displayName, rootDir } = p.config;
+        if (state.has(displayName)) {
+          throw new Error(`
 
 Found multiple projects with the same \`displayName\`: "${displayName}"
 
@@ -36,11 +35,11 @@ Change the \`displayName\` on at least one of them to prevent name collision.
     - More info: https://facebook.github.io/jest/docs/en/configuration.html#projects-array-string-projectconfig
 
             `);
-          }
+        }
 
-          const basename = path.basename(rootDir);
-          if (state.has(basename)) {
-            throw new Error(`
+        const basename = path.basename(rootDir);
+        if (state.has(basename)) {
+          throw new Error(`
 
 Found multiple projects with the same directory basename: "${basename}"
 
@@ -48,12 +47,10 @@ Add a \`displayName\` to at least one of them to prevent name collision.
     - More info: https://facebook.github.io/jest/docs/en/configuration.html#projects-array-string-projectconfig
 
             `);
-          }
+        }
 
-          return new Set([...state, displayName || basename]);
-        },
-        new Set()
-      );
+        return new Set([...state, displayName || basename]);
+      }, new Set());
 
       this._projectNames = [...projectNameSet];
       this._setActiveProjects(this._projectNames);
