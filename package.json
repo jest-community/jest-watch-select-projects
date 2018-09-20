@@ -1,6 +1,6 @@
 {
   "name": "jest-watch-select-projects",
-  "version": "0.0.2-0",
+  "version": "0.1.0",
   "main": "build/index.js",
   "author": "Rogelio Guzman <rogelioguzmanh@gmail.com>",
   "description": "An experimental ESLint runner for Jest",
@@ -14,9 +14,8 @@
     "build/"
   ],
   "scripts": {
-    "test": "jest",
-    "lint": "eslint .",
     "test": "echo No tests are set up",
+    "lint": "eslint .",
     "watch": "babel src -w --ignore **/*.test.js,integration -d build",
     "build": "babel src --ignore **/*.test.js,integration -d build",
     "prepublish": "yarn build",
