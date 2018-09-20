@@ -16,6 +16,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
+    "test": "echo No tests are set up",
     "watch": "babel src -w --ignore **/*.test.js,integration -d build",
     "build": "babel src --ignore **/*.test.js,integration -d build",
     "prepublish": "yarn build",
