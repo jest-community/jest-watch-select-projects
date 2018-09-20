@@ -1,5 +1,10 @@
 ## master
 
+## 0.1.1
+
+### Fixes
+- Fix project selection after basename addition ([#6](https://github.com/rogeliog/jest-watch-select-projects/pull/6))
+
 ## 0.1.0
 
 ### Fixes
