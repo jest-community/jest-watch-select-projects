@@ -25,7 +25,6 @@
     "ansi-escapes": "^3.1.0",
     "chalk": "^2.4.1",
     "eslint": "^4.5.0",
-    "jest-config": "^23.0.1",
     "prompts": "^0.1.8"
   },
   "devDependencies": {
