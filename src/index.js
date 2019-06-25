@@ -13,7 +13,7 @@ class JestPluginProjects {
   apply(jestHook) {
     jestHook.onFileChange(({ projects }) => this._setProjects(projects));
     jestHook.shouldRunTestSuite(({ testPath, config }) => {
-      const name = config.displayName || path.basename(config.rootDir);
+      const name = this._getDisplayName(config) || this._getBasename(config);
       return (
         this._activeProjects[name] === undefined || this._activeProjects[name]
       );
@@ -22,10 +22,22 @@ class JestPluginProjects {
 
   onKey() {}
 
+  _getDisplayName(config) {
+    const { displayName } = config;
+    return typeof displayName === 'object' ? displayName.name : displayName;
+  }
+
+  _getBasename(config) {
+    const { rootDir } = config;
+    return path.basename(rootDir);
+  }
+
   _setProjects(projects) {
     if (!this._projectNames.length) {
       const projectNameSet = projects.reduce((state, p) => {
-        const { displayName, rootDir } = p.config;
+        const displayName = this._getDisplayName(p.config);
+        const basename = this._getBasename(p.config);
+
         if (state.has(displayName)) {
           throw new Error(`
 
@@ -37,7 +49,6 @@ Change the \`displayName\` on at least one of them to prevent name collision.
             `);
         }
 
-        const basename = path.basename(rootDir);
         if (state.has(basename)) {
           throw new Error(`
 

@@ -40,5 +40,9 @@
     "execa": "0.8.0",
     "jest": "23.0.1",
     "prettier": "1.13.0"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
