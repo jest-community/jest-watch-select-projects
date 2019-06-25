@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jest-community/jest-watch-select-projects.svg?branch=master)](https://travis-ci.org/jest-community/jest-watch-select-projects) [![npm version](https://badge.fury.io/js/jest-watch-select-projects.svg)](https://badge.fury.io/js/jest-watch-select-projects)
+[![Build Status](https://travis-ci.org/jest-community/jest-watch-select-projects.svg?branch=master)](https://travis-ci.org/jest-community/jest-watch-select-projects) [![npm version](https://badge.fury.io/js/jest-watch-select-projects.svg)](https://badge.fury.io/js/jest-watch-select-projects) [![Greenkeeper badge](https://badges.greenkeeper.io/jest-community/jest-watch-select-projects.svg)](https://greenkeeper.io/)
 
 <div align="center">
   <!-- replace with accurate logo e.g from https://worldvectorlogo.com/ -->
