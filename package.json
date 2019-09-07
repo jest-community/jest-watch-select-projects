@@ -21,15 +21,15 @@
   "dependencies": {
     "ansi-escapes": "^3.1.0",
     "chalk": "^2.4.1",
-    "prompts": "^0.1.8"
+    "prompts": "^2.2.1"
   },
   "devDependencies": {
-    "eslint": "^4.5.0",
-    "eslint-config-airbnb-base": "12.1.0",
-    "eslint-config-prettier": "2.9.0",
-    "eslint-plugin-import": "2.12.0",
-    "eslint-plugin-prettier": "2.6.0",
-    "prettier": "1.13.0"
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.13.0"
   },
   "prettier": {
     "singleQuote": true,
