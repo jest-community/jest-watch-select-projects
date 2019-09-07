@@ -1,7 +1,6 @@
 const chalk = require('chalk');
 const prompts = require('prompts');
 const ansiEscapes = require('ansi-escapes');
-const { readConfig } = require('jest-config');
 const path = require('path');
 
 class JestPluginProjects {
