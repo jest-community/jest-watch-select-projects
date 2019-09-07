@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["prettier"],
+  "rules": {
+    "class-methods-use-this": "off",
+    "func-names": "off",
+    "no-console": "off",
+    "no-underscore-dangle": "off"
+  }
+}
