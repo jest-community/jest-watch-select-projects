@@ -41,7 +41,27 @@ Or in `jest.config.js`
 
 ```js
 module.exports = {
-  watchPlugins: ['jest-watch-select-projects']
+  watchPlugins: ['jest-watch-select-projects'],
+};
+```
+
+### Configuring your key and prompt name
+
+```js
+module.exports = {
+  watchPlugins: [
+    [
+      'jest-watch-select-projects',
+      {
+        key: 'X',
+        // function or string
+        prompt() {
+          const activeProjectsText = this._getActiveProjectsText();
+          return 'do something with my custom prompt';
+        },
+      },
+    ],
+  ],
 };
 ```
 
@@ -56,5 +76,3 @@ yarn jest --watch
 **Why is this running all of my projects?**
 
 Make certain that you're using the SPACE key to toggle the selected state of projects and the ENTER key to confirm your settings.
-
-
