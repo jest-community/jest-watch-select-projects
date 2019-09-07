@@ -1,6 +1,6 @@
 {
   "name": "jest-watch-select-projects",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "main": "src/index.js",
   "author": "Rogelio Guzman <rogelioguzmanh@gmail.com>",
   "description": "An experimental ESLint runner for Jest",
