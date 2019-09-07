@@ -21,7 +21,7 @@ class JestPluginProjects {
 
   apply(jestHook) {
     jestHook.onFileChange(({ projects }) => this._setProjects(projects));
-    jestHook.shouldRunTestSuite(({ testPath, config }) => {
+    jestHook.shouldRunTestSuite(({ config }) => {
       const name = this._getDisplayName(config) || this._getBasename(config);
       return (
         this._activeProjects[name] === undefined || this._activeProjects[name]
@@ -80,12 +80,13 @@ Add a \`displayName\` to at least one of them to prevent name collision.
   _setActiveProjects(activeProjects) {
     this._numActiveProjects = activeProjects.length;
     this._activeProjects = this._projectNames.reduce((memo, name) => {
+      // eslint-disable-next-line no-param-reassign
       memo[name] = activeProjects.includes(name);
       return memo;
     }, {});
   }
 
-  run(globalConfig) {
+  run() {
     console.log(ansiEscapes.clearScreen);
     return prompts([
       {
@@ -114,12 +115,12 @@ Add a \`displayName\` to at least one of them to prevent name collision.
 
     if (this._numActiveProjects === numProjects) {
       return '(all selected)';
-    } else if (this._numActiveProjects === 0) {
-      return '(zero selected)';
-    } else {
-      return `(${this._numActiveProjects}/${numProjects} selected)`;
     }
-    return;
+    if (this._numActiveProjects === 0) {
+      return '(zero selected)';
+    }
+
+    return `(${this._numActiveProjects}/${numProjects} selected)`;
   }
 
   getUsageInfo() {
