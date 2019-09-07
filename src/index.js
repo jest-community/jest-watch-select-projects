@@ -5,9 +5,19 @@ const { readConfig } = require('jest-config');
 const path = require('path');
 
 class JestPluginProjects {
-  constructor() {
+  constructor({ config }) {
     this._activeProjects = {};
     this._projectNames = [];
+    this._usageInfo = {
+      key: config.key || 'P',
+      prompt:
+        config.prompt ||
+        function() {
+          return `select projects ${chalk.italic(
+            this._getActiveProjectsText(),
+          )}`;
+        },
+    };
   }
 
   apply(jestHook) {
@@ -114,9 +124,14 @@ Add a \`displayName\` to at least one of them to prevent name collision.
   }
 
   getUsageInfo() {
+    const { key, prompt } = this._usageInfo;
+
+    const evaluatedPrompt =
+      typeof prompt === 'function' ? prompt.call(this) : prompt;
+
     return {
-      key: 'P',
-      prompt: `select projects ${chalk.italic(this._getActiveProjectsText())}`,
+      key,
+      prompt: evaluatedPrompt,
     };
   }
 }
