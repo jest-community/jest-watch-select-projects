@@ -1,9 +1,8 @@
 [![Build Status](https://travis-ci.org/jest-community/jest-watch-select-projects.svg?branch=master)](https://travis-ci.org/jest-community/jest-watch-select-projects) [![npm version](https://badge.fury.io/js/jest-watch-select-projects.svg)](https://badge.fury.io/js/jest-watch-select-projects)
 
 <div align="center">
-  <!-- replace with accurate logo e.g from https://worldvectorlogo.com/ -->
   <a href="https://facebook.github.io/jest/">
-    <img width="150" height="150" vspace="" hspace="25" src="https://cdn.worldvectorlogo.com/logos/jest.svg">
+    <img width="150" height="150" vspace="" hspace="25" src="https://jestjs.io/img/jest.png">
   </a>
   <h1>jest-watch-select-projects</h1>
   <p>Select which Jest project to run</p>
