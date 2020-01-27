@@ -1,9 +1,13 @@
 ## master
 
+## 2.0.0
+
+### Fixes
+- Update dependencies and drop Nodes older than version 8
+
 ## 1.0.0
 
 ### Features
-
 - Added custom prompt ([#10](https://github.com/rogeliog/jest-watch-select-projects/pull/10))
 
 ### Fixes
